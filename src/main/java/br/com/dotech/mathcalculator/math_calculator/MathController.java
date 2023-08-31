@@ -76,6 +76,17 @@ public class MathController {
 
         return raiz;
     }
+    @RequestMapping(value = "/pow/{numeroUm}")
+    public double pow(
+        @PathVariable(value = "numeroUm") String number1
+    )throws Exception{
+        if (!ifNumeric(number1)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value");
+        }
+        double potencia = Math.pow(convertToDouble(number1),2);
+
+        return potencia;
+    }
     
         
 
