@@ -20,7 +20,7 @@ public class MathController {
         @PathVariable (value = "numeroDois")String number2
         ) throws Exception {
             if (!ifNumeric(number1) || !ifNumeric(number2)) {
-                throw new Exception();
+                throw new UnsupportedMathOperationException("Please set a numeric value");
             }
             return convertToDouble(number1) + convertToDouble(number2);
 
