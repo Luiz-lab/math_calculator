@@ -65,26 +65,28 @@ public class MathController {
         }
         return (convertToDouble(number1) * convertToDouble(number2))/2;
     }
-    @RequestMapping(value = "/square/{numeroUm}")
+    @RequestMapping(value = "/square/{numeroUm}/{expoente}")
     public double square(
-        @PathVariable(value = "numeroUm") String number1
+        @PathVariable(value = "numeroUm") String number1,
+        @PathVariable(value = "expoente") String expoente
     )throws Exception{
         if (!ifNumeric(number1)) {
             throw new UnsupportedMathOperationException("Please set a numeric value");
         }
-        double raiz = Math.sqrt(convertToDouble(number1));
+        double expoenteFracionado = expoenteRaiz(convertToDouble(expoente));
+        double raiz = Math.pow(convertToDouble(number1),expoenteFracionado);
 
         return raiz;
     }
-    @RequestMapping(value = "/pow/{numeroUm}")
+    @RequestMapping(value = "/pow/{numeroUm}/{expoente}")
     public double pow(
-        @PathVariable(value = "numeroUm") String number1
+        @PathVariable(value = "numeroUm") String number1,
+        @PathVariable (value = "expoente") String expoente
     )throws Exception{
-        if (!ifNumeric(number1)) {
+        if (!ifNumeric(number1) || (!ifNumeric(expoente))) {
             throw new UnsupportedMathOperationException("Please set a numeric value");
         }
-        double potencia = Math.pow(convertToDouble(number1),2);
-
+        double potencia = Math.pow(convertToDouble(number1),convertToDouble(expoente));
         return potencia;
     }
     
@@ -106,6 +108,8 @@ public class MathController {
             return Double.parseDouble(number);
         }
         return 50D;
-
+    }
+    private Double expoenteRaiz(double strNumber){
+        return (1/strNumber);
     }
 }
