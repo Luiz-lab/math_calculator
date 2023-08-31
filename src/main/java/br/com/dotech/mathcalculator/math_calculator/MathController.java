@@ -18,9 +18,9 @@ public class MathController {
     public double sum (
         @PathVariable(value = "numeroUm")String number1,
         @PathVariable (value = "numeroDois")String number2
-        ) {
+        ) throws Exception {
             if (!ifNumeric(number1) || !ifNumeric(number2)) {
-                return 0D;
+                throw new Exception();
             }
             return convertToDouble(number1) + convertToDouble(number2);
 
